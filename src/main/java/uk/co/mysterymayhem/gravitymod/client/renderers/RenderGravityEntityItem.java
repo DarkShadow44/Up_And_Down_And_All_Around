@@ -25,7 +25,6 @@ public class RenderGravityEntityItem extends RenderEntityItem {
         super(renderManagerIn, Minecraft.getMinecraft().getRenderItem());
     }
 
-    /*
     //See RenderEntityItem's implementation
     //Access transformer has been used to make this method public so it could be overridden
     @SuppressWarnings("deprecation")
@@ -68,5 +67,4 @@ public class RenderGravityEntityItem extends RenderEntityItem {
             return super.transformModelCount(itemIn, xPos, yPos, zPos, partialTicks, bakedModel);
         }
     }
-    */
 }
