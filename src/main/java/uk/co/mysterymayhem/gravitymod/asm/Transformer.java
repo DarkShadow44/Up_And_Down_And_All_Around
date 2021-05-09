@@ -82,7 +82,7 @@ public class Transformer implements IClassTransformer {
         // Patches onUpdate
         addClassPatch(new PatchEntityOtherPlayerMP());
         // Patches getCollisionBoxes
-        addClassPatch(new PatchWorld());
+       // addClassPatch(new PatchWorld());
     }
 
     private static void addClassPatch(ClassPatcher patcher) {

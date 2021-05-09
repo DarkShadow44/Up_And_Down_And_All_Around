@@ -7,7 +7,8 @@
   "mixins": [
     "TestMixin",
     "MixinRenderLivingBase",
-    "MixinEntityRenderer"
+    "MixinEntityRenderer",
+    "MixinWorld"
   ],
   "client": [
   ],

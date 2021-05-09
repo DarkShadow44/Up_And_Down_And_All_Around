@@ -22,7 +22,7 @@ public class MixinEntityRenderer {
 	}
 
 	@Inject(method = "drawNameplate", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/renderer/GlStateManager;disableLighting()V", shift = Shift.BEFORE), locals = LocalCapture.CAPTURE_FAILHARD)
-	private static void correctNamePlace(FontRenderer fontRendererIn, String str, float x, float y, float z, int verticalShift,
+	private static void correctNamePlate(FontRenderer fontRendererIn, String str, float x, float y, float z, int verticalShift,
 			float viewerYaw, float viewerPitch, boolean isThirdPersonFrontal, boolean isSneaking, CallbackInfo info) {
 		Hooks.runNameplateCorrection(isThirdPersonFrontal);
 	}
