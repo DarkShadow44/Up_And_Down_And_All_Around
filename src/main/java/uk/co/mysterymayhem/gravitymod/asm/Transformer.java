@@ -13,6 +13,9 @@ import org.objectweb.asm.tree.MethodNode;
 import org.objectweb.asm.util.Textifier;
 import org.objectweb.asm.util.TraceClassVisitor;
 import org.objectweb.asm.util.TraceMethodVisitor;
+
+import com.google.common.io.Files;
+
 import uk.co.mysterymayhem.gravitymod.asm.patches.*;
 import uk.co.mysterymayhem.gravitymod.asm.util.obfuscation.IClassName;
 import uk.co.mysterymayhem.gravitymod.asm.util.obfuscation.names.DeobfAwareString;
@@ -20,6 +23,8 @@ import uk.co.mysterymayhem.gravitymod.asm.util.patching.ClassPatcher;
 import uk.co.mysterymayhem.gravitymod.asm.util.patching.PatchFailedException;
 
 import java.io.ByteArrayOutputStream;
+import java.io.File;
+import java.io.IOException;
 import java.io.OutputStream;
 import java.io.PrintWriter;
 import java.util.HashMap;
@@ -64,14 +69,14 @@ public class Transformer implements IClassTransformer {
         // Patches getMouseOver, drawNameplate
         addClassPatch(new PatchEntityRenderer());
         // Patches doRender
-        addClassPatch(new PatchRenderLivingBase());
+      //addClassPatch(new PatchRenderLivingBase());
         // Patches moveEntity, moveRelative
         addClassPatch(new PatchEntity());
         // Patches moveEntityWithHeading, updateDistance, onUpdate, jump
         addClassPatch(new PatchEntityLivingBase());
         // Patches onItemUse, useItemRightClick, onPlayerStoppedUsing
         //      (all three are used to add compatibility with other mods, they are not otherwise used by this mod)
-        addClassPatch(new PatchItemStack());
+        //addClassPatch(new PatchItemStack());
         // Patches processPlayer, processPlayerDigging
         addClassPatch(new PatchNetHandlerPlayServer());
         // Patches onUpdate
@@ -354,11 +359,24 @@ public class Transformer implements IClassTransformer {
             return bytes;
         }
         else {
+        	className = className.substring(className.lastIndexOf(".") + 1);
+        	try {
+        		new File("/home/fabian/Ramdisk/before/").mkdirs();
+				//Files.write(bytes, new File("/home/fabian/Ramdisk/before/" + className + ".class"));
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
             // Remove from the map to remove reference to the patcher so garbage collector can hopefully pick it up
             classNameToMethodMap.remove(transformedClassName);
             log("Patching class %s", transformedClassName);
             byte[] toReturn = function.apply(bytes);
             log("Patched class  %s", transformedClassName);
+            try {
+            	new File("/home/fabian/Ramdisk/after/").mkdirs();
+				//Files.write(toReturn, new File("/home/fabian/Ramdisk/after/" + className + ".class"));
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
             return toReturn;
         }
     }

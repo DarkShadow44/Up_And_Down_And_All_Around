@@ -5,7 +5,8 @@
   "minVersion": "0.8",
   "refmap": "gravitymod.refmap.json",
   "mixins": [
-    "TestMixin"
+    "TestMixin",
+    "MixinRenderLivingBase"
   ],
   "client": [
   ],
