@@ -6,7 +6,8 @@
   "refmap": "gravitymod.refmap.json",
   "mixins": [
     "TestMixin",
-    "MixinRenderLivingBase"
+    "MixinRenderLivingBase",
+    "MixinEntityRenderer"
   ],
   "client": [
   ],
