@@ -24,3 +24,4 @@ bin
 /logs/
 /libs/
 /oldlibs/
+/.apt_generated/

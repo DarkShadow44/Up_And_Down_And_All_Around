@@ -1,8 +1,11 @@
 package uk.co.mysterymayhem.gravitymod.asm;
 
-import net.minecraftforge.fml.relauncher.IFMLLoadingPlugin;
-
 import java.util.Map;
+
+import org.spongepowered.asm.launch.MixinBootstrap;
+import org.spongepowered.asm.mixin.Mixins;
+
+import net.minecraftforge.fml.relauncher.IFMLLoadingPlugin;
 
 /**
  * Created by Mysteryem on 2016-08-16.
@@ -13,6 +16,12 @@ import java.util.Map;
 // Extra late so we patch after most other mods so we can more easily tell if a patch has failed (I don't trust other mods to detect when they fail)
 @IFMLLoadingPlugin.SortingIndex(value = 9001)
 public class FMLLoadingPlugin implements IFMLLoadingPlugin {
+	
+	public FMLLoadingPlugin()
+	{
+		MixinBootstrap.init();
+		Mixins.addConfiguration("gravitymod.mixins.json");
+	}
 
     @Override
     public String[] getASMTransformerClass() {

@@ -7,14 +7,18 @@ buildscript {
             name = "forge"
             url = "http://files.minecraftforge.net/maven"
         }
+		maven { url = 'https://repo.spongepowered.org/maven' }
     }
     dependencies {
         classpath 'net.minecraftforge.gradle:ForgeGradle:3.+'
+		classpath group: 'org.spongepowered', name: 'mixingradle', version: '0.7-20200821.105029-4'
     }
 }
+
 apply plugin: 'net.minecraftforge.gradle'
 apply plugin: 'eclipse'
 apply plugin: 'maven-publish'
+apply plugin: 'org.spongepowered.mixin'
 /*
 // for people who want stable - not yet functional for MC 1.8.8 - we require the forgegradle 2.1 snapshot
 plugins {
@@ -50,6 +54,9 @@ minecraft {
 
             // Recommended logging level for the console
             property 'forge.logging.console.level', 'debug'
+			
+			arg "-mixin.config=gravitymod.mixins.json"
+			arg "-Dfml.coreMods.load=uk.co.mysterymayhem.gravitymod.asm.FMLLoadingPlugin"
         }
 
         server {
@@ -59,6 +66,9 @@ minecraft {
 
             // Recommended logging level for the console
             property 'forge.logging.console.level', 'debug'
+			
+			arg "-mixin.config=gravitymod.mixins.json"
+			arg "-Dfml.coreMods.load=uk.co.mysterymayhem.gravitymod.asm.FMLLoadingPlugin"
         }
     }
 }
@@ -74,6 +84,8 @@ dependencies {
 	minecraft 'net.minecraftforge:forge:1.12.2-14.23.5.2855'
 	
 	compile name: "Baubles", version: "1.12-1.4.5"
+	
+	compile group: "org.spongepowered", name: "mixin", version: "0.8.+", changing: true
 
     // you may put jars on which you depend on in ./libs
     // or you may define them like so..
@@ -103,7 +115,8 @@ jar {
          attributes([
 			'FMLAT': 'mysttmtgravitymod_at.cfg',
         	'FMLCorePluginContainsFMLMod': 'true',
-        	'FMLCorePlugin': 'uk.co.mysterymayhem.gravitymod.asm.FMLLoadingPlugin'
+        	'FMLCorePlugin': 'uk.co.mysterymayhem.gravitymod.asm.FMLLoadingPlugin',
+			'MixinConfigs': 'gravitymod.mixins.json'
 		])
     }
 }

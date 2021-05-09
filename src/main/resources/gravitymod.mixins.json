@@ -1,0 +1,15 @@
+{
+  "required": true,
+  "package": "uk.co.mysterymayhem.gravitymod.mixin",
+  "compatibilityLevel": "JAVA_8",
+  "minVersion": "0.8",
+  "refmap": "gravitymod.refmap.json",
+  "mixins": [
+    "TestMixin"
+  ],
+  "client": [
+  ],
+  "injectors": {
+    "defaultRequire": 1
+  }
+}
