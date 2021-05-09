@@ -16,11 +16,16 @@ import uk.co.mysterymayhem.gravitymod.asm.Hooks;
 
 @Mixin(EntityRenderer.class)
 public class MixinEntityRenderer {
+	
+	// Unknown
+	
 	@Redirect(method = "getMouseOver", at = @At(value = "INVOKE", target = "Lnet/minecraft/entity/Entity;getEntityBoundingBox()Lnet/minecraft/util/math/AxisAlignedBB;"))
 	private AxisAlignedBB getEntityBoundingBox(Entity entity) {
 		return Hooks.getVanillaEntityBoundingBox(entity);
 	}
 
+	// Fix nameplate when in different gravity
+	
 	@Inject(method = "drawNameplate", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/renderer/GlStateManager;disableLighting()V", shift = Shift.BEFORE), locals = LocalCapture.CAPTURE_FAILHARD)
 	private static void correctNamePlate(FontRenderer fontRendererIn, String str, float x, float y, float z, int verticalShift,
 			float viewerYaw, float viewerPitch, boolean isThirdPersonFrontal, boolean isSneaking, CallbackInfo info) {

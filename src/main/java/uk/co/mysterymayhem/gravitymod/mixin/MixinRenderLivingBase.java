@@ -11,6 +11,9 @@ import uk.co.mysterymayhem.gravitymod.asm.Hooks;
 @Mixin(RenderLivingBase.class)
 public class MixinRenderLivingBase {
 
+	// Fix head rotations when on ceiling
+	
+	
 	@Redirect(method = "doRender", at = @At(value = "FIELD", target = "Lnet/minecraft/entity/EntityLivingBase;prevRotationYawHead"))
 	private float prevRotationYawHead(EntityLivingBase entity) {
 		return Hooks.getPrevRelativeYawHead(entity);

@@ -10,6 +10,7 @@ import uk.co.mysterymayhem.gravitymod.asm.Hooks;
 
 @Mixin(World.class)
 public class MixinWorld {
+	// Unknown why
 	@ModifyVariable(method = "getCollisionBoxes", argsOnly = true, at = @At("HEAD"))
 	private AxisAlignedBB getCollisionBoxes(AxisAlignedBB box) {
 		return Hooks.normaliseAABB(box);
